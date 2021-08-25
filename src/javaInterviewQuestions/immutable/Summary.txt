@@ -1,0 +1,15 @@
+Immutable class :-
+Immutable class means once we created the object, we can't change its content.
+In Java, all the wrapper classes like Integer, Long, Byte, Short and String class are immutable classes.
+We can create our own immutable classes as well.
+
+For creating our own immutable classes:-
+1. The class must be declared as final (If you don't mark the class final, it might be possible for me
+   to suddenly make your seemingly immutable class actually mutable)
+2. Data members must be declared as private (so that it can't be easily accessible)
+3. Data members must be declared as final (so that we can't the change the object after creation)
+4. A parameterized constructor should initialize all the fields by performing the deep copy (so that the object can't be
+   modified using the object reference)
+5. Deep Copy of objects should be performed in the getter methods (To return a copy rather than
+   returning the actual object reference)
+6. No setter methods (To not have the option to change the value of the instance variable)

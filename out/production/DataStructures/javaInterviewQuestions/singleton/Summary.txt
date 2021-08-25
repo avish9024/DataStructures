@@ -1,0 +1,19 @@
+Singleton class :-
+
+A singleton class is a class which can have only one instance at a time.
+After first time, if we try to instantiate the Singleton class,
+the new variable also points to the first instance created.
+So whatever modifications we do to any variable inside the class through any instance,
+it affects the variable of the single instance created and
+is visible if we access that variable through any variable of that class type defined.
+
+For making a class as singleton,
+1. Make the constructor as private
+2. Write a static method that has return type object of this singleton class
+
+Uses :-
+It is used to provide global point of access to the object.
+In terms of practical use Singleton patterns are used in logging, configuration settings.
+
+
+

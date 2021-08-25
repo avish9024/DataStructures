@@ -1,0 +1,41 @@
+Comparator and Comparable both interfaces that are used to sort objects using the data members of the class.
+
+To summarize, if sorting of objects needs to be based on natural order then use Comparable
+whereas if your sorting needs to be done on attributes of different objects, then use Comparator in Java.
+
+Comparable :-
+A comparable object is capable of comparing itself with another object.
+The class itself must implement the java.lang.Comparable interface to compare its instances.
+Consider a Employee class that has members like, id, name, salary, address.
+Suppose we wish to sort a list of Employees based on their salary.
+We can implement the Comparable interface with the Employee class,
+and we override the method compareTo() of Comparable interface.
+Refer Employee class for implementation of Comparable interface.
+Now, suppose we want to sort employee by their names and id as well.
+When we make a collection element comparable(by having it implement Comparable),
+we get only one chance to implement the compareTo() method. The solution is using Comparator.
+
+Comparator:-
+Unlike Comparable, Comparator is external to the element type we are comparing.
+ It’s a separate class. We create multiple separate classes (that implement Comparator) to compare by different members.
+Collections class has a second sort() method and it takes Comparator. The sort() method invokes the compare() to sort objects.
+
+To compare students by age, we need to do 3 things :
+Create a class that implements Comparator (and thus the compare() method that does the work previously done by compareTo()).
+Make an instance of the Comparator class.
+Call the overloaded sort() method, giving it both the list and the instance of the class that implements Comparator.
+
+Difference between Comparable and Comparator :-
+
+Comparable :-
+1. It provides single sorting sequence.It means we can use only one attribute of a class at the time of overriding
+   compareTo() method in our class
+2. It provides compareTo() method
+3. It is present in java.lang package.
+4. We can sort using the Collections.sort(list) method
+
+Comparator:-
+1. It provides multiple sorting sequence. It means we can sort on the basis of multiple attributes of a class
+2. It provides compare() method
+3. It is present in java.util package
+4. We can sort using the Collections.sort(list, our Comparator) method
