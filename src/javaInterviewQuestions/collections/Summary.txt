@@ -1,0 +1,161 @@
+Any group of individual objects which are represented as single unit is known as collection of the objects. In java,
+a separate framework named "Collection Framework" has been defined in JDK 1.2 which holds all the collection classes and
+interface in it.
+
+The collection interface (java.util.Collection) and Map interface (java.util.Map) are the two main "root" interfaces of
+Java collection classes.
+
+Advantages of Collection Framework :-
+1. Consistent API - The API has basic set of interfaces like Collection, Set, List, or Map, all the classes (ArrayList,
+   LinkedList, Vector, etc) that implement these interfaces have some common set of methods.
+2. Reduces programming effort :- A programmer doesn't have to worry about the design of the Collection but rather he
+   can focus on its best use in his program.
+3. Increases program speed and quality :- Increases performance by providing high-performance implementations of useful
+   data structures and algorithms because in this case, the programmer need not think of the best implementation of a
+   specific data structure.He can simply use the best implementation to drastically boost the performance of his program.
+
+List Interface:-
+
+It provides a way to store the ordered collection. It is a child interface of Collection. It is an ordered collection
+of objects in which duplicate values can be stored.Since List preserves the insertion order, it allows positional
+access and insertion of elements.
+
+ArrayList ---------> List -------> Collection
+         implements       extends
+
+Classes that implements List Interface :-
+1. ArrayList
+2. LinkedList extends AbstractSequentialList
+3. Vector
+4. AbstractList
+5. ArrayListCopyOnWrite
+
+6. AbstractSequentialList extends AbstractList
+
+1. ArrayList :-
+   It is implemented in collection framework provides us dynamic arrays in Java.Though, it may be slower than standard
+   arrays but can be helpful in programs where lots of manipulation in the array is needed.
+
+2. LinkedList :-
+   This class is an implementation of LinkedList data structure which is linear data structure where the elements are
+   not stored in contiguous locations and every element is a separate object with data part and address part. The elements
+   are linked using pointers and addresses.Each element is known as node. Due to the dynamicity and ease of insertionns
+   and deletions, they are preferred over arrays.It also has few disadvantages like the nodes cannot be accessed directly
+   instead we need to start from head and follow through the link to reach to a node we wish to access.
+
+3. Vector :-
+   It is implemented in Collection framework implements a growable array of objects. Vector implements a dynamic array that
+   means it can grow or shrink as required. Like an array, it contains components that can be accesed using an integer index.
+   Vectors basically fall in legacy classes but now it is fully compatible with collections
+
+4. AbstractList :-
+   This class is used to implement an unmodifiable list, for which one need to only extend this AbstractList class and implement
+   only the get() and size() methods.
+
+5. ArrayLisTCopyOnWrite :-
+   This class implements the list interface. It is an enhanced version of ArrayList in which all the modifications (add, set, remove)
+   are implemented by making a fresh copy of list.
+
+6. AbstractSequentialList :-
+   This class implements the Collection Interface and the AbstractCollection class. This class is used to implement an unmodifiable
+   list, for which one needs to only extend this AbstractList class and implement only the get() and the size() methods.
+
+ArrayList vs LinkedList :-
+* ArrayList internally uses dynamic array to store the elements while linkedList internally uses doubly linked list to store elements
+* Deletion in arrayList is costlier than the linkedList
+* An arrayList can act as a list only because it implements List only while linkedList can act as a list and queue both because it
+  implements List and Deque interfaces.
+* ArrayList is better for storing and accessing data while LinkedList is better for manipulating data
+
+Set Interface :-
+It is an unordered collection of objects in which duplicate values cannot be stored. It is an interface that implements the mathematical set.
+There are two interfaces that extend the set implementation namely SortedSet and NavigableSet.
+
+Classes that implement the Set interface :-
+1. HashSet
+2. EnumSet
+3. LinkedHashSet
+4. TreeSet
+
+Difference between List and Set :-
+* List allows addition of duplicate elements while set doesn't
+* Insertion order is preserved in List while in set it is not preserved.
+* List allows addition of null values any number of times but in set null value can be added only once
+* We can get elements of a specified index from list using get() method but set does not provide any get method
+
+Internal working of hashset :-
+// predefined HashSet class
+public class HashSet
+{
+    // A HashMap object
+    private transient HashMap map;
+
+    // A Dummy value(PRESENT) to associate with an Object in the Map
+    private static final Object PRESENT = new Object();
+
+    // default constructor of HashSet class
+    // It creates a HashMap by calling
+    // default constructor of HashMap class
+    public HashSet() {
+        map = new HashMap<>();
+    }
+
+    // add method
+    // it calls put() method on map object
+    // and then compares it's return value with null
+    public boolean add(E e) {
+        return map.put(e, PRESENT)==null;
+    }
+
+    // Other methods in Hash Set
+}
+
+Whenever we create a HashSet , it internally creates a HashMap and if we insert an element using add() method, it actually calls put() method on internally created
+HashMap object with element you have specified as its key and constant object called "PRESENT" as its value. So we can say that a Set achieve uniqueness internally
+through HashMap.
+
+Map Interface :-
+It is present in java.util package. It represents a mapping between  key and a value. The Map interface si not subtype of Collection interface.
+Therefore, it behaves a bit differently from the rest of the collection types. A map contain unique keys.
+
+Classes which implement the Map interface :-
+1. HashMap
+2. LinkedHashMap
+3. TreeMap
+
+Internal working of HashMap :-
+HashMap contains an array of Node and Node can represent a class having following objects :-
+1. int hash
+2. K key
+3. V value
+4. Node next
+
+Hashing- It is a process of converting an object into integer form by using the method hashCode(). It is necessary to write hashCode() method properly for better
+performance of HashMap.
+
+hashCode() method - It is used to get the hashCode of an object.hashCode() method of object class returns the memory reference of object in integer form. Definition
+of hashCode() method is public native hashCode().
+In HashMap, hashCode() is used to calculate the bucket and therefore, calculate the index.
+
+equals() method - It is used to check that 2 objects are equal or ot.This method is provided by Object class.
+HashMap uses equals() method to compare the key whether they are equal or not. if equals() method return true, they are equal otherwise ot equal
+
+Buckets - A bucket is one element of HashMap array. It is used to store nodes. Two or more nodes can have same bucket. In that case link list structure is used
+to connect the nodes. Buckets are different in capacity. A relation between bucket and capacity are as follows
+   capacity = number of buckets * load factor
+
+LinkedHashMap Internal Working :-
+It is just like HashMap with an additional feature of maintaining an order of elements inserted into it.
+
+ConcurrentHashMap :-
+It belongs to java.util.concurrent package, which implements ConcurrentMap as well as to Serializable interface also.
+It is an enhancement of HashMap as we know while dealing with threads Hashmap is not a good choice.
+
+Key points :-
+* Concurrent Hashmap is thread-safe i.e. multiple threads ca operate on a single object without any complications.
+* At a time any number of threads are applicable for a read operation without locking the ConcurrentHashMap object which is not there in HashMap
+* In ConcurrentHashMap, the object is divided into a number of segments according to the concurrency level
+* In Concurrent HashMap, at a time number of threads can perform retrieval operation but for updated in object, the thread must lock the particulat
+  segment in which the thread wants to operate. this type of locking mechanism is called Segment locking or bucket locking.
+* Inserting null objects is not possible in ConcurrentHashMap as a key or value.
+
