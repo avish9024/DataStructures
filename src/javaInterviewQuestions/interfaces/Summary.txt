@@ -1,0 +1,82 @@
+Interface specify what a class must do but not how.It is the blueprint of the class.
+It specifies a set of methods that a class must implement.
+If a class that implements an interface and does not provide the method bodies for all the methods in the interface,
+then it must be declared as abstract class.
+
+To declare an interface, use interface keyword.It provides total abstraction.
+
+Why use interfaces?
+* It is used to achieve total abstraction
+* Since java does not support multiple inheritance in case of class, but by using interface it can achieve multiple inheritance
+* It is also used to achieve loose coupling
+* Interfaces are used to implement abstraction. So the question arises, why use interfaces when we have abstract classes?
+The reason is, abstract classes may contain non-final variables, where variables in interface are final, public and static.
+* A class can implement more than one interface.
+* An interface can extend other interface or interfaces (more than one interface)
+* All methods are public and abstract. And all the variables are public , static and final
+* We can't create instance(interface can't be instantiated) of interface but we can make reference of it that refers to
+  the Object of its implementing class.
+
+Note :-
+From Java 8, we can now add default implementation for interface methods. This default implementation has
+special use and does not affect the intention behind interfaces.
+
+Suppose we need to add a new function in an existing interface. Obviously, the old code will not work as the classes have not
+implemented those new functions. So, with the help of default implementation, we will ive a default body for the newly added
+functions. Then the old codes will still work.
+
+Difference between class and interface
+* In class, you can instantiate variable and create an object. But in an interface, ypu can't instantiate variable and create an object
+* Class can contain concrete (with implementation) methods But interface cannot contain concrete methods
+* The access specifiers used with classes are private, protected and public while in interface only one specifier is used - public
+
+When to use interface and abstract class ?
+when to use abstract class :-
+* In Java application, there are some related classes that need to share some line of codes then you can put these lines
+  of code within the abstract class and this abstract class should be extended by all these related classes
+* You can define non-static or non-final fields in the abstract class so that via a method you can access and modify the
+  state of the Object to which they belong
+* You can expect that the classes that extend an abstract class have many common methods or fields, or require access modifiers
+  other than public (such as protected and private)
+
+when to use interfaces :-
+* It is a total abstraction. All methods declared within an interface must be implemented by the classes that implements theis interface
+* A class can implement more than one interface. It is called multiple inheritance.
+* You want to specify the behaviour of a particular data type, but not concerned about who implements its behaviour.
+
+
+Difference between abstract class and interface?
+* Type of methods : Interface can have only abstract methods. An abstract class can have abstract and non-abstract methods.
+  From Java 8, interfaces can have default and static methods also.
+* Final variables :- Variables declared in interface are by default final. An abstract class may contain non-final variables.
+* Type of variables :- Abstract class can have final, non-final, static and non-static variables.The interface has only static and final variables.
+* Implementation :- An abstract class can provide the implementation of the interface. Interface can't provide the implementation of abstract class.
+* Inheritance vs abstraction :- A Java interface can be implemented using implements keyword while an abstract class can be extended using the extends keyword
+* Multiple implementations :- An interface can extend another Java interface only, an abstract class can extend another Java class and implement multiple interfaces
+* Accessibility of Data members :- Members of interfaces are public by default. An abstract class can have members like private, protected.
+
+
+Marker interface :-
+It is an empty interface (no fields or methods). Examples of marker interface are
+Serializable, Cloneable, Remote interface. All these interfaces are empty interfaces.
+
+Serializable interface in Java :-
+It is present in java.io package. A marker interface does not have any methods and fields. Thus classes implementing it do not have
+to implement any methods. Classes implement it if they want their instances to be serialized ot deserialized.
+Serialization is a mechanism of converting the state of an object into byte stream. It is done using the ObjectOutputStream.
+Deserialization is the reverse process where the byte stream is used to recreate the actual Java object in memory. This mechanism is used to persist the object.
+Deserialization is done using ObjectInputStream.
+
+Cloneable Interface in Java :-
+It is present in java.lang package. There is a method clone() in the Object class. Cloneable interface is implemented by a
+class to make Object.clone() method valid thereby making field-for-field copy. This interface allows the implementing class
+to have its objects to be cloned instead of using a new operator.
+
+If you try to clone an object which does not implement the Cloneable interface, it will throw CloneNotSupportedException.
+
+Deep co py using clone() method
+It is like creating an exact copy of the original object by copying the fields from the original object to the cloned object.
+A separate memory is allocated for the cloned objects where the original object content is copied. Clone() method can create
+both shallow and deep copy of its original object based on the implementation of it. Deep copy creates a new memory with the
+contents same as the original object. That's why when we change the content of the original object after cloning, the changes
+do not reflect in the clone object.

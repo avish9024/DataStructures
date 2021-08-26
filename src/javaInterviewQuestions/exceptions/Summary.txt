@@ -1,0 +1,101 @@
+What is an Exception?
+An exception is an unwanted or unexpected event, which occurs during the execution of a run i.e. at run time,
+that disrupts the normal flow of the program's instructions.
+
+Error vs Exception
+* Recovering from error is not possible. But we can recover from exception by either using try-catch block
+  throwing exceptions back to caller.
+* All errors in java are unchecked type. Exceptions include both checked and unchecked type.
+* Errors are mostly caused by the environment in which the program is running. But program itself is responsible
+  for causing exceptions.
+* Errors are defined in java.lang.Error package. While exceptions are defined in java.lang.Exception package.
+* Errors example :- StackOverflowError, OutOfMemoryError
+* Exceptions example :- Checked Exceptions - SQLExceptions, IOException
+                        Unchecked Exceptions - ArrayIndexOutOfBoundException, NullPointerException, ArithmeticException
+
+Checked Exceptions :-
+Exceptions that are checked at compile time. If some code within a method throws a checked exception,
+then the method must either handle the exception or it must specify the exception using throws keyword.
+For ex - Consider a program that opens file at location "C:\test\a.txt" and prints the first three lines
+of it. The program doesn't compile, because the function main() uses FileReader() and FileReader throws a
+checked exception FileNotFoundException. It also uses readLine() and close() methods and these methods also
+throw checked exception IOException.
+
+Unchecked Exceptions :-
+Exceptions that are not checked at compile time. In Java, exceptions under Error and RuntimeException
+classes are unchecked exceptions, everything else under throwable is checked.
+
+Exception Hierarchy :-
+All exception and errors types are subclasses of class Throwable, which is base class of hierarchy.
+One branch is headed by Exception.This class is used for exceptional conditions that user programs should catch.
+NullPointerException is an example of such an exceptions.Another branch, Error are used by the Java
+run time system(JVM) to indicate errors having to do with the runtime environment itself (JRE).
+StackOverflowError is an example of such an error.
+
+
+               Object
+                  |
+                  |
+              Throwable
+                  |
+          ------------------
+          |                 |
+       Exceptions         Error---
+       |                          |- Virtual Machine Error
+       |- Checked Exceptions      |- Assertion Error
+       |- Unchecked Exceptions    |
+
+How JVM handle exceptions ?
+Default Exception Handling :-
+Whenever inside a method, if an exceptions has occurred, the method creates an Object known as Exception object
+and hands it off to the JVM. The exception object contains name and description of the exception and current
+state of the program where exception has occurred. Creating the Exception object and handling it to JVM is called
+throwing an Exception. There might be the list of the methods that had been called to get the method where
+exception has occurred. This ordered list of methods is called Call stack.Now the following procedure will happen :-
+* The JVM searches the call stack to find the method that contains the block of code that can handle the occurred
+ exception. The block of code is called Exception handler.
+* The JVM starts searching from the method in which exception occurred, proceeds through call stack in reverse order
+  in which methods were called.
+* If it finds appropriate handler then it passes the occurred exception to it. Appropriate handler means the type
+  of exception object thrown matches the type of exception object it can handle.
+* If JVM searches all the methods on call stack and couldn't have found the appropriate handler then JVM handover
+ the Exception Object to default exception handler, which is part of JVM. This handler prints the exception information
+ and terminates the program.
+
+How programmer handles an exception ?
+Customized Exception handling :-
+Java exception handling is managed via five keywords - try, catch, throw, throws and finally.Program statements that
+you think can raise exceptions  are contained within a try block. If an exception occurs within the try block, it is thrown.
+You code can catch this exception using catch block  and handle it in some rational manner.System generated exceptions
+are automatically thrown by JVM. To manually throw an exception, use the keyword throw.Any exceptions that is thrown out
+of a method must be specified as such by a throws clause. Any code that absolutely must be executed after a try block
+completes is put in finally block.
+
+How to use try-catch-finally clause :-
+
+try {
+   // block of code that can raise an exception
+} catch (ExceptionType1 e1) {
+   // exception handler for ExceptionType1
+} catch (ExceptionType2 e2) {
+   // exception handler for ExceptionType2
+}
+// optional
+finally {
+   // block of code to be executed after try block ends
+}
+
+Points to remember :-
+* In a method, there can be more than one statements that might throw exception, So put all these statements within its own try block
+  and provide separate exception handler within own catch block for each of them
+* If an exception occurs within  the try block, that exception is handled by exception handler associated with it.
+  To associate exception handler, we must put catch block after it. There can be more than one exception handlers.
+  Each catch block is an exception handler that handles the exception of the type indicated by its argument.
+  The argument, ExceptionType declares the type of exception that it can handle and must be the name of the class
+  that inherits from Throwable class.
+* For each try block, there can be zero or more catch blocks, but only one finally block.
+* The finally block is optional. It always get executed whether an exception occurred in try block or not. If exception
+  occurs, then it will be executed after try and catch blocks. and if exception does not occur then it will be executed
+  after the try block. The finally block in java is used to put important codes such as clean up code i.e. closing the
+  file or closing the connection
+
